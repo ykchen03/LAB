@@ -17,6 +17,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
 }).addTo(mymap);
 
+const Operator = {
+    13 : "<a href=\"http://www.hcbus.com.tw\">新竹客運</a>",
+    14 : "<a href=\"http://www.mlbus.com.tw\">苗栗客運</a>",
+    18 : "<a href=\"http://www.yosemite-bus.com.tw\">科技之星交通</a>",
+    45 : "<a href=\"http://www.kingbus.com.tw\">國光客運</a>",
+    67 : "<a href=\"http://www.gobus.com.tw\">金牌客運</a>"
+};
+
 function showRoute(){
     markers.clearLayers();
     fetch('https://worker-dry-wind-ac0b.ykchen03.workers.dev/?route='+ $("#selection").val())
@@ -25,7 +33,9 @@ function showRoute(){
         console.log('Success:', data);
         L.geoJSON(data.route).addTo(markers);
         data.bus.forEach(item => {
-            L.marker([item.BusPosition.PositionLat, item.BusPosition.PositionLon], {icon: greenIcon}).addTo(markers);
+            L.marker([item.BusPosition.PositionLat, item.BusPosition.PositionLon], {icon: greenIcon})
+            .bindPopup(`<b>車號:</b> ${item.PlateNumb}<br><b>車速:</b> ${item.Speed}<br><b>營運者:</b> ${Operator[item.OperatorID]}<br><b>更新時間:</b> ${item.UpdateTime}`)
+            .addTo(markers);
         });
     })
 }

@@ -19,8 +19,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 function showRoute(){
     markers.clearLayers();
-    //fetch('https://worker-dry-wind-ac0b.ykchen03.workers.dev/?route='+ $("#selection").val())
-    fetch('worker-dry-wind-ac0b.ykchen03.workers.dev/?route=' + $("#selection").val())
+    fetch('https://worker-dry-wind-ac0b.ykchen03.workers.dev/?route='+ $("#selection").val())
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);

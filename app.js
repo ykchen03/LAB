@@ -34,7 +34,7 @@ function showRoute(){
         L.geoJSON(data.route).addTo(markers);
         data.bus.forEach(item => {
             L.marker([item.BusPosition.PositionLat, item.BusPosition.PositionLon], {icon: greenIcon})
-            .bindPopup(`<b>車號:</b> ${item.PlateNumb}<br><b>車速:</b> ${item.Speed}<br><b>營運者:</b> ${Operator[item.OperatorID]}<br><b>更新時間:</b> ${item.UpdateTime}`)
+            .bindPopup(`<b>車號:</b> ${item.PlateNumb}<br><b>車速:</b> ${item.Speed}km/h<br><b>營運者:</b> ${Operator[item.OperatorID]}<br><b>更新時間:</b> ${item.UpdateTime}`)
             .addTo(markers);
         });
     })

@@ -31,10 +31,17 @@ function showRoute(){
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
-        L.geoJSON(data.route).addTo(markers);
+        L.geoJSON(data.route,{
+            pointToLayer: function (feature, latlng) {
+                const direction = feature.properties.model.Direction == 0 ? "去程" : "返程";
+                return L.marker(latlng)
+                .bindPopup(`<b>站名:</b> ${feature.properties.model.StopName}<br><b>方向:</b> ${direction}<br>`);
+            }
+        }).addTo(markers);
         data.bus.forEach(item => {
+            const direction = item.Direction == 0 ? "去程" : "返程";
             L.marker([item.BusPosition.PositionLat, item.BusPosition.PositionLon], {icon: greenIcon})
-            .bindPopup(`<b>車號:</b> ${item.PlateNumb}<br><b>車速:</b> ${item.Speed}km/h<br><b>營運者:</b> ${Operator[item.OperatorID]}<br><b>更新時間:</b> ${item.UpdateTime}`)
+            .bindPopup(`<b>車號:</b> ${item.PlateNumb}<br><b>車速:</b> ${item.Speed}km/h<br><b>方向:</b> ${direction}<br><b>營運者:</b> ${Operator[item.OperatorID]}<br><b>更新時間:</b> ${item.UpdateTime}`)
             .addTo(markers);
         });
     })

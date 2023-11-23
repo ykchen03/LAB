@@ -54,3 +54,5 @@ function showRoute(){
         });
     })
 }
+
+$("#price").hide();

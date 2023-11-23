@@ -44,5 +44,13 @@ function showRoute(){
             .bindPopup(`<b>車號:</b> ${item.PlateNumb}<br><b>車速:</b> ${item.Speed}km/h<br><b>方向:</b> ${direction}<br><b>營運者:</b> ${Operator[item.OperatorID]}<br><b>更新時間:</b> ${item.UpdateTime}`)
             .addTo(markers);
         });
+        $("#price").show();
+        data.ticket.forEach(item => {
+            const info = item.StageFares[0];
+            $("#price").append(`<tr><td>起點:${info.OriginStage.StopName}</td><td>終點:${info.DestinationStage.StopName}</td></tr>`);
+            info.Fares.forEach(fare => {
+                $("#price").append(`<tr><td>${fare.FareName}</td><td>${fare.Price}</td></tr>`);
+            });
+        });
     })
 }

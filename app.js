@@ -27,6 +27,7 @@ const Operator = {
 
 function showRoute(){
     markers.clearLayers();
+    $("#price").empty();
     fetch('https://worker-dry-wind-ac0b.ykchen03.workers.dev/?route='+ $("#selection").val())
     .then(response => response.json())
     .then(data => {

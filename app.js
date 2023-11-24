@@ -48,7 +48,7 @@ function showRoute(){
         $("#price").show();
         data.ticket.forEach(item => {
             const info = item.StageFares[0];
-            $("#price").append(`<tr><td>起點:${info.OriginStage.StopName}</td><td>終點:${info.DestinationStage.StopName}</td></tr>`);
+            $("#price").append(`<tr style="background-color: yellow;font-weight: bold;"><td>起點:${info.OriginStage.StopName}</td><td>終點:${info.DestinationStage.StopName}</td></tr>`);
             info.Fares.forEach(fare => {
                 $("#price").append(`<tr><td>${fare.FareName}</td><td>${fare.Price}</td></tr>`);
             });
